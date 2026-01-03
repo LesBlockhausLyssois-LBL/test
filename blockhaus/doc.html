@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualisation Document - LBL</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Style spécifique pour la visionneuse */
+        #doc-viewer-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+        #doc-header {
+            margin-bottom: 20px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        #doc-iframe {
+            flex-grow: 1;
+            width: 100%;
+            height: 700px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .error-msg {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 50px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar"></aside>
+    <script src="navigation.js"></script>
+
+    <div id="doc-viewer-container">
+        <div id="doc-header">
+            <h1 id="doc-title">Chargement...</h1>
+            <p id="doc-desc"></p>
+        </div>
+        
+        <div id="viewer-area">
+            <iframe id="doc-iframe" src="" allow="autoplay"></iframe>
+        </div>
+    </div>
+
+    <script>
+        async function loadDocument() {
+            // 1. Récupérer l'ID dans l'URL (ex: ?id=bef705)
+            const urlParams = new URLSearchParams(window.location.search);
+            const docId = urlParams.get('id');
+
+            if (!docId) {
+                document.getElementById('doc-viewer-container').innerHTML = "<p class='error-msg'>Aucun identifiant de document spécifié.</p>";
+                return;
+            }
+
+            try {
+                // 2. Charger le fichier JSON
+                const response = await fetch('docs_data.json');
+                const data = await response.json();
+
+                // 3. Chercher le document correspondant à l'ID
+                const docInfo = data[docId];
+
+                if (docInfo) {
+                    // 4. Mettre à jour la page
+                    document.title = docInfo.titre + " - LBL";
+                    document.getElementById('doc-title').textContent = docInfo.titre;
+                    document.getElementById('doc-desc').textContent = docInfo.description || "";
+                    document.getElementById('doc-iframe').src = docInfo.url;
+                } else {
+                    document.getElementById('doc-viewer-container').innerHTML = "<p class='error-msg'>Document introuvable dans la base de données.</p>";
+                }
+            } catch (error) {
+                console.error("Erreur de chargement :", error);
+                document.getElementById('doc-viewer-container').innerHTML = "<p class='error-msg'>Erreur lors du chargement des données.</p>";
+            }
+        }
+
+        // Lancer la fonction au chargement
+        window.onload = loadDocument;
+    </script>
+</body>
+</html>

@@ -3,8 +3,6 @@ async function generateSidebar() {
     const data = await response.json();
     const sidebar = document.querySelector('.sidebar');
 
-    let html = '<div><h3>Ressources :</h3>';
-
     // Génération des boutons de ressources
     data.ressources.forEach(item => {
         const target = item.external ? 'target="_blank"' : '';

@@ -17,19 +17,10 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
 
-    /* Fond gris-beige type WikiMaginot */
     background-color: #bdb7a8;
-
-    /* Ton image de fond */
-    background-image:
-        linear-gradient(
-            rgba(189,183,168,0.75),
-            rgba(189,183,168,0.75)
-        ),
-        url("fond2.jpg");
-
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     background-attachment: fixed;
 
     min-height: 100vh;
@@ -357,7 +348,30 @@ function searchBlockhaus() {
     if (!found) resultsContainer.innerHTML = "<em>Aucun résultat trouvé.</em>";
 }
 </script>
+<script>
+const fonds = [
+    "fond/fond1.jpg",
+    "fond/fond2.jpg",
+    "fond/fond3.jpg",
+    "fond/fond4.jpg",
+    "fond/fond5.jpg"
+];
 
+let precedent = localStorage.getItem("dernierFond");
+let disponible = fonds.filter(f => f !== precedent);
+
+let fondAleatoire =
+    disponible[Math.floor(Math.random() * disponible.length)];
+
+localStorage.setItem("dernierFond", fondAleatoire);
+
+document.body.style.backgroundImage =
+    `linear-gradient(
+        rgba(189,183,168,0.75),
+        rgba(189,183,168,0.75)
+    ),
+    url('${fondAleatoire}')`;
+</script>
 </body>
 </html>
 

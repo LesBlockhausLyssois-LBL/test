@@ -10,395 +10,267 @@
     <meta name="google-site-verification" content="cydYtbmdvqtDGK0UeZR3MJKOUgTLQ5OP5PRBEw4IUHQ" />
     <title>L'Histoire du Secteur Fortifié de Lille</title>
     <style>
-       *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
-
-body{
-    background:#f4f4f4;
-    color:#333;
-    padding:15px;
-}
-
-
-/* CONTENEUR */
-
-.container{
-    width:100%;
-    max-width:1200px;
-    margin:auto;
-    background:white;
-    border-radius:12px;
-    overflow:hidden;
-    box-shadow:0 5px 20px rgba(0,0,0,.1);
-}
-
-
-/* HEADER */
-
-header{
-    background:#c0392b;
-    color:white;
-    text-align:center;
-    padding:30px 20px;
-}
-
-header h1{
-    font-size:2rem;
-    margin-bottom:10px;
-}
-
-
-/* LIVRES */
-
-.book-card{
-    display:flex;
-    flex-direction:column;
-    border-bottom:1px solid #ddd;
-}
-
-
-.cover{
-    background:#f7f7f7;
-    padding:20px;
-    text-align:center;
-}
-
-
-.cover img{
-    width:100%;
-    max-width:260px;
-    height:auto;
-    border-radius:8px;
-    box-shadow:0 4px 12px rgba(0,0,0,.2);
-}
-
-
-.content{
-    padding:20px;
-}
-
-
-.title{
-    color:#c0392b;
-    margin-bottom:10px;
-    line-height:1.3;
-}
-
-
-.subtitle{
-    color:#666;
-    font-style:italic;
-    margin-bottom:15px;
-}
-
-
-.content p{
-    margin-bottom:15px;
-    text-align:justify;
-}
-
-
-/* BOUTONS */
-
-.buttons{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    margin-top:15px;
-}
-
-
-.btn{
-    display:block;
-    width:100%;
-    padding:14px;
-    border-radius:6px;
-    text-decoration:none;
-    text-align:center;
-    color:white;
-    background:#c0392b;
-    font-weight:bold;
-    transition:.3s;
-}
-
-
-.btn:hover{
-    background:#a93226;
-}
-
-
-/* INFORMATIONS */
-
-.info{
-    margin-top:15px;
-    padding:12px;
-    background:#f5f5f5;
-    border-radius:8px;
-}
-
-
-/* FOOTER */
-
-footer{
-    text-align:center;
-    padding:20px;
-    background:#fafafa;
-    color:#666;
-    font-size:.95rem;
-}
-
-
-/* POPUP */
-
-.popup-overlay{
-
-    position:fixed;
-
-    top:0;
-    left:0;
-
-    width:100%;
-    height:100%;
-
-    background:rgba(0,0,0,.75);
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    padding:15px;
-
-    z-index:9999;
-}
-
-
-
-.popup{
-
-    background:white;
-
-    width:100%;
-    max-width:700px;
-
-    max-height:90vh;
-
-    overflow-y:auto;
-
-    padding:30px;
-
-    border-radius:12px;
-
-    text-align:center;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.3);
-
-}
-
-
-
-.popup h2{
-
-    color:#c0392b;
-
-    margin-bottom:20px;
-
-    font-size:1.6rem;
-
-}
-
-
-
-.popup p{
-
-    margin-bottom:15px;
-
-    line-height:1.6;
-
-}
-
-
-
-.popup button{
-
-    background:#c0392b;
-
-    color:white;
-
-    border:none;
-
-    width:100%;
-
-    padding:14px;
-
-    border-radius:6px;
-
-    cursor:pointer;
-
-    font-weight:bold;
-
-    margin-top:10px;
-
-}
-
-
-
-.popup button:hover{
-
-    background:#a93226;
-
-}
-
-
-
-/* TABLET + PC */
-
-@media(min-width:768px){
-
-
-    .book-card{
-
-        flex-direction:row;
-
-        align-items:center;
-
-    }
-
-
-    .cover{
-
-        flex:0 0 280px;
-
-    }
-
-
-    .content{
-
-        flex:1;
-
-    }
-
-
-    .buttons{
-
-        flex-direction:row;
-
-    }
-
-
-    .btn{
-
-        width:auto;
-
-        padding:12px 25px;
-
-    }
-
-}
-
-
-
-/* MOBILE */
-
-@media(max-width:600px){
-
-
-    body{
-
-        padding:8px;
-
-    }
-
-
-
-    header{
-
-        padding:20px 15px;
-
-    }
-
-
-
-    header h1{
-
-        font-size:1.6rem;
-
-    }
-
-
-
-    .content{
-
-        padding:15px;
-
-    }
-
-
-
-    .title{
-
-        font-size:1.25rem;
-
-    }
-
-
-
-    .cover img{
-
-        max-width:220px;
-
-    }
-
-
-
-    .popup-overlay{
-
-        padding:10px;
-
-    }
-
-
-
-    .popup{
-
-        max-height:85vh;
-
-        padding:20px 15px;
-
-    }
-
-
-
-    .popup h2{
-
-        font-size:1.25rem;
-
-    }
-
-
-
-    .popup p{
-
-        text-align:left;
-
-        font-size:.9rem;
-
-        line-height:1.5;
-
-    }
-
-
-
-    footer{
-
-        font-size:.85rem;
-
-    }
-
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 12px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .book-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .book-card:last-of-type {
+            border-bottom: none;
+        }
+
+        .cover-section {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .cover-section img {
+            width: 100%;
+            max-width: 320px;
+            max-height: 360px;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+        }
+
+        .left-section,
+        .right-section {
+            padding: 12px;
+        }
+
+        .right-section {
+            background-color: #f0f0f0;
+        }
+
+        .book-title {
+            font-size: 1.25rem;
+            color: #d35400;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .book-subtitle {
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 12px;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .book-description p {
+            margin-bottom: 10px;
+            text-align: justify;
+            font-size: 0.95rem;
+        }
+
+        .read-button,
+        .download-button,
+        .website-button,
+        .coming-soon-button {
+            display: block;
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .read-button,
+        .download-button,
+        .website-button {
+            background-color: #c0392b;
+            color: white;
+        }
+
+        .coming-soon-button {
+            background-color: #95a5a6;
+            color: white;
+            cursor: not-allowed;
+        }
+
+        .info-box {
+            background-color: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+
+        .info-box h3 {
+            margin-bottom: 6px;
+            color: #2c3e50;
+            font-size: 1rem;
+        }
+
+        .info-box p {
+            margin-bottom: 4px;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 8px;
+            color: #7f8c8d;
+            font-size: 0.85rem;
+        }
+
+        .footer p {
+            margin: 2px 0;
+        }
+
+        .badge-local {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background-color: #c0392b;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            z-index: 1;
+        }
+
+        .download-section {
+            padding: 14px;
+            background: linear-gradient(180deg, #fff, #f7f7f7);
+        }
+
+        .download-card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 14px;
+            border: 1px solid #e5e5e5;
+            border-radius: 10px;
+            background: #ffffff;
+        }
+
+        .download-card h2 {
+            font-size: 1.15rem;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .download-card p {
+            text-align: center;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            .book-card {
+                flex-direction: row;
+                align-items: stretch;
+            }
+
+            .book-card:first-of-type .cover-section {
+                flex: 0 0 180px;
+            }
+
+            .book-card:first-of-type .cover-section img {
+                max-width: 160px;
+                max-height: 320px;
+            }
+
+            .book-card:not(:first-of-type) .cover-section {
+                flex: 0 0 140px;
+            }
+
+            .book-card:not(:first-of-type) .cover-section img {
+                max-width: 120px;
+                max-height: 260px;
+            }
+
+            .left-section {
+                flex: 1;
+                padding: 18px;
+            }
+
+            .right-section {
+                flex: 0 0 280px;
+                padding: 18px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .book-title {
+                font-size: 1.45rem;
+            }
+
+            .book-subtitle,
+            .book-description p,
+            .info-box p,
+            .download-card p {
+                font-size: 1rem;
+            }
+
+            .download-section {
+                padding: 20px;
+            }
+
+            .download-card {
+                max-width: 520px;
+                margin: 0 auto;
+                padding: 18px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                overflow: hidden;
+            }
+
+            .book-card:first-of-type .cover-section {
+                flex-basis: 220px;
+            }
+
+            .book-card:first-of-type .cover-section img {
+                max-width: 190px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -426,6 +298,8 @@ footer{
                     <p><strong>Auteur :</strong> Groupe Les Blockhaus Lyssois</p>
                     <p><strong>Pages :</strong> 91</p>
                 </div>
+                <div class="footer">
+                     <a href="https://lesblockhauslyssois-lbl.github.io/LBL/" class="website-button" target="_blank" rel="noopener">Site des Blockhaus Lyssois</a>
                 <div class="footer">
                     <p>© LesBlockhausLyssois — 2026</p>
                     <p><strong>Contact :</strong> lesblockhauslyssois@gmail.com</p>
@@ -457,6 +331,8 @@ footer{
                     <p><strong>Auteur :</strong> Groupe Les Blockhaus Lyssois</p>
                     <p><strong>Pages :</strong> 72</p>
                 </div>
+                <div class="footer">
+                     <a href="https://lesblockhauslyssois-lbl.github.io/LBL/" class="website-button" target="_blank" rel="noopener">Site des Blockhaus Lyssois</a>
                 <div class="footer">
                     <p>© LesBlockhausLyssois — 2025</p>
                     <p><strong>Contact :</strong> lesblockhauslyssois@gmail.com</p>

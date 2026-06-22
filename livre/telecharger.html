@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/Y2g29xsg/Design-sans-titre-(30).png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bibliothèque numérique des Blockhaus Lyssois. Téléchargement gratuit des ouvrages historiques.">
+    <meta name="keywords" content="livres histoire, blockhaus lyssois, secteur fortifié de lille, ligne maginot, PDF gratuit">
+    <meta name="author" content="Les Blockhaus Lyssois">
+
+    <title>Telecharger</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,sans-serif;
+        }
+
+        body{
+            background:#f4f4f4;
+            color:#333;
+            padding:15px;
+        }
+
+        .container{
+            max-width:1200px;
+            margin:auto;
+            background:white;
+            border-radius:12px;
+            overflow:hidden;
+            box-shadow:0 5px 20px rgba(0,0,0,.1);
+        }
+
+        header{
+            background:#c0392b;
+            color:white;
+            text-align:center;
+            padding:30px 20px;
+        }
+
+        header h1{
+            margin-bottom:10px;
+        }
+
+        header p{
+            opacity:.9;
+        }
+
+        .book-card{
+            display:flex;
+            flex-direction:column;
+            border-bottom:1px solid #ddd;
+        }
+
+        .cover{
+            background:#f7f7f7;
+            text-align:center;
+            padding:20px;
+        }
+
+        .cover img{
+            width:100%;
+            max-width:260px;
+            border-radius:8px;
+            box-shadow:0 4px 12px rgba(0,0,0,.2);
+        }
+
+        .content{
+            padding:20px;
+        }
+
+        .title{
+            color:#c0392b;
+            margin-bottom:10px;
+        }
+
+        .subtitle{
+            color:#666;
+            font-style:italic;
+            margin-bottom:15px;
+        }
+
+        .content p{
+            margin-bottom:15px;
+            text-align:justify;
+        }
+
+        .buttons{
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+            margin-top:15px;
+        }
+
+        .btn{
+            display:inline-block;
+            padding:12px 18px;
+            border-radius:6px;
+            text-decoration:none;
+            color:white;
+            background:#c0392b;
+            font-weight:bold;
+            transition:.3s;
+        }
+
+        .btn:hover{
+            background:#a93226;
+        }
+
+        .info{
+            margin-top:15px;
+            padding:12px;
+            background:#f5f5f5;
+            border-radius:8px;
+        }
+
+        footer{
+            text-align:center;
+            padding:20px;
+            background:#fafafa;
+            color:#666;
+        }
+
+        /* POPUP */
+
+        .popup-overlay{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,.75);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            z-index:9999;
+        }
+
+        .popup{
+            background:white;
+            max-width:700px;
+            width:90%;
+            border-radius:12px;
+            padding:30px;
+            text-align:center;
+            box-shadow:0 10px 30px rgba(0,0,0,.3);
+        }
+
+        .popup h2{
+            color:#c0392b;
+            margin-bottom:20px;
+        }
+
+        .popup p{
+            margin-bottom:15px;
+            line-height:1.7;
+        }
+
+        .popup button{
+            background:#c0392b;
+            color:white;
+            border:none;
+            padding:12px 25px;
+            border-radius:6px;
+            cursor:pointer;
+            font-weight:bold;
+            margin-top:10px;
+        }
+
+        .popup button:hover{
+            background:#a93226;
+        }
+
+        @media(min-width:768px){
+
+            .book-card{
+                flex-direction:row;
+            }
+
+            .cover{
+                flex:0 0 280px;
+            }
+
+            .content{
+                flex:1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- POPUP LEGALE -->
+
+    <div class="popup-overlay" id="popupLegal">
+        <div class="popup">
+            <h2>📚 Conditions d'utilisation</h2>
+
+            <p>
+                Les ouvrages présents sur cette bibliothèque numérique sont mis
+                gratuitement à disposition du public par le groupe
+                <strong>Les Blockhaus Lyssois</strong>.
+            </p>
+
+            <p>
+                Ces documents sont destinés à un usage strictement personnel
+                et privé.
+            </p>
+
+            <p>
+                Toute reproduction, diffusion, modification, publication,
+                partage sur une autre plateforme ou utilisation commerciale
+                sans autorisation écrite préalable est interdite.
+            </p>
+
+            <p>
+                La vente de ces ouvrages, en version numérique ou imprimée,
+                est strictement interdite.
+            </p>
+
+            <p>
+                En cliquant sur « J'ai compris », vous reconnaissez avoir pris
+                connaissance de ces conditions.
+            </p>
+
+            <button onclick="fermerPopup()">J'ai compris</button>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <header>
+            <h1>Telecharger</h1>
+        </header>
+
+        <!-- Livre 1 -->
+
+        <section class="book-card">
+
+            <div class="cover">
+                <img src="couv3.png" alt="Lys Lez Lannoy et ses alentours dans la débâcle de 1940">
+            </div>
+
+            <div class="content">
+
+                <h2 class="title">Lys Lez Lannoy et ses alentours dans la débâcle de 1940</h2>
+
+                <div class="buttons">
+                    <a href="#" class="btn" data-file="livrelys19405.pdf" onclick="telechargerFichier(event, this)">Télécharger PDF</a>
+                </div>
+
+                <div class="info">
+                    <strong>Format :</strong> 91 pages
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Livre 2 -->
+
+        <section class="book-card">
+
+            <div class="cover">
+                <img src="couv.png" alt="L'histoire du secteur fortifié de Lille">
+            </div>
+
+            <div class="content">
+
+                <h2 class="title">L'histoire du Secteur Fortifié de Lille</h2>
+
+    
+
+                <div class="buttons">
+                    <a href="#" class="btn" data-file="histoiresfl.pdf" onclick="telechargerFichier(event, this)">Télécharger PDF</a>
+                </div>
+
+                <div class="info">
+                    <strong>Format :</strong> 72 pages
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Livre 3 -->
+
+        <section class="book-card">
+
+            <div class="cover">
+                <img src="couv2.png" alt="La bataille du secteur fortifié de Lille">
+            </div>
+
+            <div class="content">
+
+                <h2 class="title">La bataille du secteur fortifié de Lille</h2>
+
+                <div class="buttons">
+                    <a href="#" class="btn" data-file="bataillesfl.pdf" onclick="telechargerFichier(event, this)">Télécharger PDF</a>
+                </div>
+
+                <div class="info">
+                    <strong>Format :</strong> 35 pages
+                </div>
+
+            </div>
+
+        </section>
+
+        <footer>
+            <p>© Les Blockhaus Lyssois - 2026</p>
+            <p>Contact : lesblockhauslyssois@gmail.com</p>
+        </footer>
+
+    </div>
+
+    <script>
+        function fermerPopup() {
+            document.getElementById("popupLegal").style.display = "none";
+        }
+
+        function telechargerFichier(event, element) {
+            event.preventDefault();
+
+            const fichier = element.getAttribute("data-file");
+            const lienTemporaire = document.createElement("a");
+
+            lienTemporaire.href = fichier;
+            lienTemporaire.download = fichier;
+            lienTemporaire.target = "_self";
+            document.body.appendChild(lienTemporaire);
+            lienTemporaire.click();
+            document.body.removeChild(lienTemporaire);
+        }
+    </script>
+
+</body>
+</html>

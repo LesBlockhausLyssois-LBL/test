@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/Y2g29xsg/Design-sans-titre-(30).png" />
+  <meta charset="UTF-8">
+  <title>L'histoire du Secteur Fortifié de Lille</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PDF.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+    }
+
+    header {
+      padding: 10px;
+      text-align: center;
+      background: #222;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    #viewer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+
+    canvas {
+      margin-bottom: 15px;
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      background: white;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 8px 12px;
+      border: none;
+      background: #444;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #666;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="controls">
+    <button onclick="prevPage()">⬅️ Précédent</button>
+    <button onclick="nextPage()">Suivant ➡️</button>
+  </div>
+</header>
+
+<div id="viewer"></div>
+
+<script>
+  const url = "histoiresfl.pdf"; // Remplace par ton PDF
+
+  let pdfDoc = null;
+  let currentPage = 1;
+  let scale = 1.5;
+
+  const viewer = document.getElementById("viewer");
+  const pageInfo = document.getElementById("pageInfo");
+
+  pdfjsLib.getDocument(url).promise.then(pdf => {
+    pdfDoc = pdf;
+    renderAllPages();
+  });
+
+  function renderAllPages() {
+    viewer.innerHTML = "";
+    for (let i = 1; i <= pdfDoc.numPages; i++) {
+      renderPage(i);
+    }
+  }
+
+  function renderPage(num) {
+    pdfDoc.getPage(num).then(page => {
+      const viewport = page.getViewport({ scale: scale });
+
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+
+      viewer.appendChild(canvas);
+
+      page.render({
+        canvasContext: context,
+        viewport: viewport
+      });
+    });
+  }
+
+  function prevPage() {
+    window.scrollBy({
+      top: -window.innerHeight,
+      behavior: "smooth"
+    });
+  }
+
+  function nextPage() {
+    window.scrollBy({
+      top: window.innerHeight,
+      behavior: "smooth"
+    });
+  }
+</script>
+
+</body>
+</html>

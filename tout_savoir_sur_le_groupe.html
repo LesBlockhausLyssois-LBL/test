@@ -1,21 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <link rel="icon" type="image/png" href="https://i.postimg.cc/Y2g29xsg/Design-sans-titre-(30).png" />
     <script src="mobile-detect.js"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tout savoir sur le groupe - LesBlockhausLyssois</title>
+
+    <title>Aceuil - LesBlockhausLyssois</title>
+
     <link rel="stylesheet" href="style.css">
+
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-image: url("background4.webp");
+            background-color: #bdb7a8;
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
             background-attachment: fixed;
             min-height: 100vh;
+            color: #000;
+        }
+
+        #tout_savoir_sur_le_groupe {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(255,255,255,0.75);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Titre + logo */
+        .titre-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .titre-logo h1 {
+            margin: 0;
+            text-align: center;
+        }
+
+        .titre-logo img {
+            width: 75px;
+            height: auto;
+        }
+
+        /* Boutons */
+        .btn {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 12px 22px;
+            background: #5c4a2e;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #3e321f;
+            transform: scale(1.03);
+        }
+
+        .devenir-membre {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.55);
+            border-radius: 10px;
+        }
+
+        .devenir-membre p {
+            margin-top: 0;
         }
 
         /* Bouton discret mentions légales */
@@ -41,36 +104,128 @@
 </head>
 
 <body>
-    <aside class="sidebar">
-    </aside>
+
+    <aside class="sidebar"></aside>
     <script src="navigation.js"></script>
 
     <div id="tout_savoir_sur_le_groupe">
-        <h1>À propos du groupe</h1>
+
+        <div class="titre-logo">
+            <h1>À propos du groupe</h1>
+            <img src="fond/logo.png" alt="Logo Les Blockhaus Lyssois">
+        </div>
+
         <p><strong>Les Blockhaus Lyssois : Béton, histoire et mémoire</strong></p>
+
         <p>
-          Le groupe "Les Blockhaus Lyssois" est né d'une passion commune pour l'histoire et le patrimoine local, plus précisément celui des blockhaus présents sur le territoire de Lys-lez-Lannoy et ses environs.
-          Notre objectif principal est de préserver la mémoire de ces constructions, témoins silencieux d'un passé souvent douloureux mais toujours fascinant.
+            Le groupe <strong>Les Blockhaus Lyssois</strong> est né d'une passion commune
+            pour l'histoire et le patrimoine local, plus précisément celui des blockhaus
+            présents sur le territoire de Lys-lez-Lannoy et ses environs.
+            Notre objectif principal est de préserver la mémoire de ces constructions,
+            témoins silencieux d'un passé souvent douloureux mais toujours fascinant.
         </p>
+
         <p>
-          <strong>Nous nous engageons dans plusieurs actions pour atteindre ce but :</strong><br><br>
-          <strong>Recherche et documentation :</strong> Nous menons des recherches approfondies sur l'histoire des blockhaus, leur construction, leur utilisation. Nous rassemblons des informations, des photos et des documents d'archives pour constituer un répertoire complet et accessible au public.<br><br>
-          <strong>Préservation du patrimoine :</strong> Nous œuvrons à sensibiliser les autorités et le grand public à leur importance historique.<br><br>
-          <strong>Partage des connaissances :</strong> faire découvrir l'histoire des blockhaus à un public large, des passionnés d'histoire aux simples curieux.
+            <strong>Nous nous engageons dans plusieurs actions pour atteindre ce but :</strong>
         </p>
-        <p><strong>Rejoignez "Les Blockhaus Lyssois"</strong> pour partager votre passion, contribuer à la sauvegarde de notre histoire et découvrir ensemble les secrets de ces fascinantes constructions !</p>
-        <p>Pour information : nous ne sommes pas une association.</p>
-        <a href="membres.html" target="_blank">Découvrez la liste de nos membres ICI</a><br>
-    </div>
+
+        <p>
+            <strong>Recherche et documentation :</strong><br>
+            Nous menons des recherches approfondies sur l'histoire des blockhaus, leur
+            construction et leur utilisation. Nous rassemblons des informations,
+            des photos et des documents d'archives afin de constituer un répertoire
+            complet et accessible au public.
+        </p>
+
+        <p>
+            <strong>Préservation du patrimoine :</strong><br>
+            Nous œuvrons à sensibiliser les autorités ainsi que le grand public
+            à l'importance historique de ces ouvrages.
+        </p>
+
+        <p>
+            <strong>Partage des connaissances :</strong><br>
+            Nous faisons découvrir l'histoire des blockhaus à un public large,
+            des passionnés d'histoire aux simples curieux.
+        </p>
+
+        <p>
+            <strong>Rejoignez "Les Blockhaus Lyssois"</strong> pour partager votre passion,
+            contribuer à la sauvegarde de notre histoire et découvrir ensemble
+            les secrets de ces fascinantes constructions !
+        </p>
+
+        <p><strong>Pour information :</strong> nous ne sommes pas une association.</p>
+
+        <hr>
+
+        <a href="membres.html" target="_blank" class="btn">
+            👥 Les membres actifs
+        </a>
+
+        <br>
+
+        <a href="https://forms.gle/dc52TZvApo6YsSUR7" target="_blank" class="btn">
+            ⭐ Laisser un avis
+        </a>
+
+        <div class="devenir-membre">
+
+            <h2>Devenir membre</h2>
+
+            <p>
+                Pour devenir membre, c'est très simple !
+                Il vous suffit de remplir le questionnaire ci-dessous
+                et nous vous donnerons notre réponse dans les meilleurs délais.
+            </p>
+
+            <a href="LIEN_DE_VOTRE_FORMULAIRE" target="_blank" class="btn">
+                🤝 Devenir membre
+            </a>
+
+        </div>
+
     </div>
 
     <!-- Bouton mentions légales -->
-    <a href="mentionslegales.html" class="mentions-btn">Mentions légales</a>
+    <a href="mentionslegales.html" class="mentions-btn">
+        Mentions légales
+    </a>
+
+    <script>
+        const fonds = [
+            "fond/fond1.jpg",
+            "fond/fond2.jpg",
+            "fond/fond3.jpg",
+            "fond/fond4.jpg",
+            "fond/fond5.jpg",
+            "fond/fond6.jpg",
+            "fond/fond7.jpg",
+            "fond/fond8.jpg",
+            "fond/fond9.jpg",
+            "fond/fond10.jpg",
+            "fond/fond11.jpg",
+            "fond/fond12.jpg",
+            "fond/fond13.jpg",
+            "fond/fond14.jpg",
+            "fond/fond15.jpg"
+        ];
+
+        let precedent = localStorage.getItem("dernierFond");
+        let disponible = fonds.filter(f => f !== precedent);
+
+        let fondAleatoire =
+            disponible[Math.floor(Math.random() * disponible.length)];
+
+        localStorage.setItem("dernierFond", fondAleatoire);
+
+        document.body.style.backgroundImage =
+            `linear-gradient(
+                rgba(189,183,168,0.75),
+                rgba(189,183,168,0.75)
+            ),
+            url('${fondAleatoire}')`;
+    </script>
 
 </body>
 </html>
-
-
-
-
-

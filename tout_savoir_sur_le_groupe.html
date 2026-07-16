@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <link rel="icon" type="image/png" href="https://i.postimg.cc/Y2g29xsg/Design-sans-titre-(30).png" />
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/Y2g29xsg/Design-sans-titre-(30).png">
     <script src="mobile-detect.js"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Aceuil - LesBlockhausLyssois</title>
+    <title>Tout savoir sur le groupe - Les Blockhaus Lyssois</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -33,31 +33,32 @@
             backdrop-filter: blur(5px);
         }
 
-        /* Titre + logo */
-        .titre-logo {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .titre-logo h1 {
-            margin: 0;
+        h1 {
             text-align: center;
+            margin-bottom: 10px;
         }
 
-        .titre-logo img {
-            width: 75px;
-            height: auto;
+        .logo {
+            display: block;
+            width: 170px;
+            max-width: 90%;
+            margin: 0 auto 30px;
         }
 
-        /* Boutons */
-        .btn {
+        p {
+            line-height: 1.7;
+        }
+
+        .boutons {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .action-btn {
             display: inline-block;
-            margin: 10px 0;
+            margin: 10px;
             padding: 12px 22px;
-            background: #5c4a2e;
+            background: #2f5e87;
             color: white;
             text-decoration: none;
             border-radius: 8px;
@@ -65,40 +66,36 @@
             transition: 0.3s;
         }
 
-        .btn:hover {
-            background: #3e321f;
-            transform: scale(1.03);
+        .action-btn:hover {
+            background: #1e4566;
+            transform: translateY(-2px);
         }
 
         .devenir-membre {
-            margin-top: 30px;
+            margin-top: 40px;
             padding: 20px;
             background: rgba(255,255,255,0.55);
             border-radius: 10px;
+            text-align: center;
         }
 
-        .devenir-membre p {
-            margin-top: 0;
-        }
-
-        /* Bouton discret mentions légales */
         .mentions-btn {
             position: fixed;
             bottom: 10px;
             right: 15px;
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255,255,255,0.6);
             text-decoration: none;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0,0,0,0.3);
             padding: 6px 10px;
             border-radius: 8px;
             backdrop-filter: blur(4px);
-            transition: all 0.2s ease;
+            transition: all .2s ease;
         }
 
         .mentions-btn:hover {
             color: white;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0,0,0,0.6);
         }
     </style>
 </head>
@@ -106,81 +103,78 @@
 <body>
 
     <aside class="sidebar"></aside>
+
     <script src="navigation.js"></script>
 
     <div id="tout_savoir_sur_le_groupe">
 
-        <div class="titre-logo">
-            <h1>À propos du groupe</h1>
-            <img src="fond/logo.jpg" alt="Logo Les Blockhaus Lyssois">
-        </div>
+        <h1>À propos du groupe</h1>
+
+        <!-- Logo -->
+        <img src="https://i.postimg.cc/Y2g29xsg/Design-sans-titre-(30).png"
+             alt="Logo Les Blockhaus Lyssois"
+             class="logo">
 
         <p><strong>Les Blockhaus Lyssois : Béton, histoire et mémoire</strong></p>
 
         <p>
-            Le groupe <strong>Les Blockhaus Lyssois</strong> est né d'une passion commune
-            pour l'histoire et le patrimoine local, plus précisément celui des blockhaus
-            présents sur le territoire de Lys-lez-Lannoy et ses environs.
+            Le groupe <strong>"Les Blockhaus Lyssois"</strong> est né d'une passion commune pour l'histoire et le patrimoine local,
+            plus précisément celui des blockhaus présents sur le territoire de Lys-lez-Lannoy et ses environs.
             Notre objectif principal est de préserver la mémoire de ces constructions,
             témoins silencieux d'un passé souvent douloureux mais toujours fascinant.
         </p>
 
         <p>
             <strong>Nous nous engageons dans plusieurs actions pour atteindre ce but :</strong>
-        </p>
+            <br><br>
 
-        <p>
             <strong>Recherche et documentation :</strong><br>
-            Nous menons des recherches approfondies sur l'histoire des blockhaus, leur
-            construction et leur utilisation. Nous rassemblons des informations,
-            des photos et des documents d'archives afin de constituer un répertoire
-            complet et accessible au public.
-        </p>
+            Nous menons des recherches approfondies sur l'histoire des blockhaus, leur construction et leur utilisation.
+            Nous rassemblons des informations, des photos et des documents d'archives afin de constituer un répertoire complet et accessible au public.
 
-        <p>
+            <br><br>
+
             <strong>Préservation du patrimoine :</strong><br>
-            Nous œuvrons à sensibiliser les autorités ainsi que le grand public
-            à l'importance historique de ces ouvrages.
-        </p>
+            Nous œuvrons à sensibiliser les autorités et le grand public à leur importance historique.
 
-        <p>
+            <br><br>
+
             <strong>Partage des connaissances :</strong><br>
-            Nous faisons découvrir l'histoire des blockhaus à un public large,
-            des passionnés d'histoire aux simples curieux.
+            Faire découvrir l'histoire des blockhaus à un public large, des passionnés d'histoire aux simples curieux.
         </p>
 
         <p>
             <strong>Rejoignez "Les Blockhaus Lyssois"</strong> pour partager votre passion,
-            contribuer à la sauvegarde de notre histoire et découvrir ensemble
-            les secrets de ces fascinantes constructions !
+            contribuer à la sauvegarde de notre histoire et découvrir ensemble les secrets de ces fascinantes constructions !
         </p>
 
         <p><strong>Pour information :</strong> nous ne sommes pas une association.</p>
 
-        <hr>
+        <div class="boutons">
 
-        <a href="membres.html" target="_blank" class="btn">
-            👥 Les membres actifs
-        </a>
+            <a href="membres.html" target="_blank" class="action-btn">
+                Les membres actifs
+            </a>
 
-        <br>
+            <a href="https://forms.gle/dc52TZvApo6YsSUR7" target="_blank" class="action-btn">
+                Laisser un avis
+            </a>
 
-        <a href="https://forms.gle/dc52TZvApo6YsSUR7" target="_blank" class="btn">
-            ⭐ Laisser un avis
-        </a>
+        </div>
 
         <div class="devenir-membre">
 
             <h2>Devenir membre</h2>
 
             <p>
-                Pour devenir membre, c'est très simple !
+                Pour devenir membre, c'est très simple.
                 Il vous suffit de remplir le questionnaire ci-dessous
-                et nous vous donnerons notre réponse dans les meilleurs délais.
+                et nous vous donnerons notre réponse.
             </p>
 
-            <a href="LIEN_DE_VOTRE_FORMULAIRE" target="_blank" class="btn">
-                🤝 Devenir membre
+            <!-- Remplace le # par le lien de ton formulaire -->
+            <a href="#" target="_blank" class="action-btn">
+                Devenir membre
             </a>
 
         </div>

@@ -804,3 +804,29 @@ input, textarea, select {
         min-width: 48px;
     }
 }
+/* Centrage du bandeau sur PC */
+@media screen and (min-width: 769px) {
+
+    .site-top-banner {
+        width: 100%;
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        margin: 0 auto;
+        padding: 15px 0;
+    }
+
+}
+/* Centrage du menu sur PC */
+@media screen and (min-width: 769px) {
+
+    .menu-wrap {
+        justify-content: center;
+    }
+
+    .menu-resources,
+    .menu-actions {
+        justify-content: center;
+    }
+
+}

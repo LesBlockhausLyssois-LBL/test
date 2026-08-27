@@ -1,0 +1,2296 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+content="Visite virtuelle du musée Les Blockhaus Lyssois">
+
+<title>Visite virtuelle - Les Blockhaus Lyssois</title>
+
+<link rel="icon"
+type="image/png"
+href="https://i.postimg.cc/Y2g29xsg/Design-sans-titre-(30).png">
+
+<!-- PDF.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<style>
+
+/* =========================================================
+   BASE
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: white;
+
+    background-color: #111;
+
+    background-image:
+        linear-gradient(
+            rgba(0,0,0,0.72),
+            rgba(0,0,0,0.82)
+        ),
+        url("arriereplan.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-attachment: fixed;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page {
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    min-height: 82px;
+
+    padding: 12px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    background: rgba(20,20,20,0.96);
+
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+
+    box-shadow:
+        0 4px 20px rgba(0,0,0,0.5);
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo-zone {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 0;
+}
+
+.logo {
+
+    width: 52px;
+
+    height: 52px;
+
+    object-fit: contain;
+
+    background: white;
+
+    border-radius: 50%;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   TITRE
+========================================================= */
+
+.title-zone {
+    min-width: 0;
+}
+
+.title-zone h1 {
+
+    margin: 0;
+
+    font-size: 23px;
+
+    line-height: 1.2;
+}
+
+.title-zone p {
+
+    margin: 4px 0 0;
+
+    color: #aaa;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   BOUTONS HEADER
+========================================================= */
+
+.header-buttons {
+
+    display: flex;
+
+    gap: 8px;
+}
+
+.header-button {
+
+    width: 44px;
+
+    height: 44px;
+
+    border: 1px solid #555;
+
+    border-radius: 8px;
+
+    background: #292929;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.header-button:hover {
+
+    background: #c59b5b;
+
+    color: #111;
+}
+
+
+/* =========================================================
+   BARRE PROGRESSION
+========================================================= */
+
+.progress-container {
+
+    position: sticky;
+
+    top: 82px;
+
+    z-index: 900;
+
+    padding: 8px 20px;
+
+    background: rgba(10,10,10,0.96);
+
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.progress-info {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 6px;
+
+    color: #aaa;
+
+    font-size: 12px;
+}
+
+.progress-bar {
+
+    width: 100%;
+
+    height: 5px;
+
+    overflow: hidden;
+
+    background: #444;
+
+    border-radius: 10px;
+}
+
+.progress {
+
+    width: 0%;
+
+    height: 100%;
+
+    background: #c59b5b;
+
+    transition: width 0.3s ease;
+}
+
+
+/* =========================================================
+   CONTENU
+========================================================= */
+
+.viewer {
+
+    width: 100%;
+
+    max-width: 1400px;
+
+    margin: auto;
+
+    padding: 30px 20px 60px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   TITRE DU PANNEAU
+========================================================= */
+
+.panel-title {
+
+    margin-bottom: 20px;
+}
+
+.panel-title h2 {
+
+    margin: 0 0 8px;
+
+    font-size: 30px;
+}
+
+.panel-title p {
+
+    margin: 0;
+
+    color: #aaa;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   ZONE PDF
+========================================================= */
+
+.pdf-box {
+
+    position: relative;
+
+    width: 100%;
+
+    min-height: 500px;
+
+    padding: 15px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle,
+            #303030,
+            #151515
+        );
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.6);
+
+    overflow: auto;
+}
+
+
+/* =========================================================
+   CANVAS
+========================================================= */
+
+#pdf-render {
+
+    display: block;
+
+    max-width: 100%;
+
+    height: auto;
+
+    background: white;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,0.7);
+
+    border-radius: 4px;
+}
+
+
+/* =========================================================
+   CHARGEMENT
+========================================================= */
+
+.loading {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 20;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #181818;
+
+    color: white;
+}
+
+.loading.hidden {
+    display: none;
+}
+
+.spinner {
+
+    width: 45px;
+
+    height: 45px;
+
+    margin-bottom: 15px;
+
+    border: 4px solid #555;
+
+    border-top-color: #c59b5b;
+
+    border-radius: 50%;
+
+    animation:
+        spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   OUTILS
+========================================================= */
+
+.tools {
+
+    margin-top: 15px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+}
+
+.tool {
+
+    padding: 9px 15px;
+
+    border: 1px solid #555;
+
+    border-radius: 7px;
+
+    background: #252525;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 14px;
+}
+
+.tool:hover {
+
+    background: #c59b5b;
+
+    color: #111;
+}
+
+
+/* =========================================================
+   INFORMATIONS PAGE
+========================================================= */
+
+.page-number {
+
+    margin-top: 15px;
+
+    color: #ccc;
+
+    font-size: 17px;
+}
+
+.page-number strong {
+    color: #e0bd7b;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.navigation {
+
+    margin-top: 20px;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+}
+
+.nav-button {
+
+    min-width: 190px;
+
+    padding: 14px 20px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #c59b5b;
+
+    color: #111;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.nav-button:hover:not(:disabled) {
+
+    background: #e0bd7b;
+
+    transform: translateY(-2px);
+}
+
+.nav-button:disabled {
+
+    opacity: 0.3;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+.menu {
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    z-index: 3000;
+
+    width: 350px;
+
+    max-width: 90%;
+
+    height: 100vh;
+
+    overflow-y: auto;
+
+    background: #1b1b1b;
+
+    box-shadow:
+        10px 0 35px rgba(0,0,0,0.7);
+
+    transform: translateX(-100%);
+
+    transition: transform 0.3s ease;
+}
+
+.menu.open {
+
+    transform: translateX(0);
+}
+
+.menu-header {
+
+    position: sticky;
+
+    top: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 18px;
+
+    background: #171717;
+
+    border-bottom: 1px solid #444;
+}
+
+.menu-header h2 {
+
+    margin: 0;
+
+    font-size: 19px;
+}
+
+.close {
+
+    width: 40px;
+
+    height: 40px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #333;
+
+    color: white;
+
+    font-size: 25px;
+
+    cursor: pointer;
+}
+
+.close:hover {
+
+    background: #c59b5b;
+
+    color: #111;
+}
+
+
+/* =========================================================
+   LISTE MENU
+========================================================= */
+
+.page-list {
+
+    padding: 15px;
+}
+
+.page-item {
+
+    width: 100%;
+
+    min-height: 55px;
+
+    margin-bottom: 8px;
+
+    padding: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    border: 1px solid #444;
+
+    border-radius: 8px;
+
+    background: #252525;
+
+    color: white;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.page-item:hover {
+
+    background: #333;
+
+    border-color: #c59b5b;
+}
+
+.page-item.active {
+
+    background: #c59b5b;
+
+    color: #111;
+
+    border-color: #c59b5b;
+}
+
+.page-circle {
+
+    width: 35px;
+
+    height: 35px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #111;
+
+    color: white;
+
+    font-weight: bold;
+
+    font-size: 13px;
+}
+
+.page-item.active .page-circle {
+
+    background: white;
+
+    color: #111;
+}
+
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 2500;
+
+    background: rgba(0,0,0,0.65);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: 0.3s;
+}
+
+.overlay.visible {
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   FIN
+========================================================= */
+
+.end {
+
+    display: none;
+
+    max-width: 700px;
+
+    margin: 35px auto 0;
+
+    padding: 30px 20px;
+
+    border: 1px solid #c59b5b;
+
+    border-radius: 12px;
+
+    background: rgba(197,155,91,0.1);
+}
+
+.end.visible {
+
+    display: block;
+
+    animation:
+        appear 0.4s ease;
+}
+
+@keyframes appear {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+.end h2 {
+
+    margin-top: 0;
+
+    font-size: 27px;
+}
+
+.end p {
+
+    color: #ccc;
+
+    line-height: 1.6;
+}
+
+.end-buttons {
+
+    margin-top: 20px;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.end-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 45px;
+
+    padding: 10px 20px;
+
+    border-radius: 8px;
+
+    background: #c59b5b;
+
+    color: #111;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    border: none;
+
+    cursor: pointer;
+}
+
+.end-button:hover {
+
+    background: #e0bd7b;
+}
+
+
+/* =========================================================
+   ERREUR
+========================================================= */
+
+.error {
+
+    display: none;
+
+    margin: 25px auto;
+
+    max-width: 700px;
+
+    padding: 20px;
+
+    border: 1px solid #8b3a3a;
+
+    border-radius: 10px;
+
+    background: rgba(120,30,30,0.25);
+
+    line-height: 1.6;
+}
+
+.error.visible {
+    display: block;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    padding: 30px 20px;
+
+    background: #121212;
+
+    border-top: 1px solid rgba(255,255,255,0.1);
+
+    color: #777;
+
+    text-align: center;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    header {
+
+        min-height: 70px;
+
+        padding: 10px 12px;
+    }
+
+    .progress-container {
+
+        top: 70px;
+
+        padding:
+            8px 12px;
+    }
+
+    .logo {
+
+        width: 42px;
+
+        height: 42px;
+    }
+
+    .title-zone h1 {
+
+        font-size: 17px;
+    }
+
+    .title-zone p {
+
+        display: none;
+    }
+
+    .header-button {
+
+        width: 39px;
+
+        height: 39px;
+
+        font-size: 17px;
+    }
+
+    .viewer {
+
+        padding:
+            25px 8px 45px;
+    }
+
+    .panel-title h2 {
+
+        font-size: 22px;
+    }
+
+    .panel-title p {
+
+        font-size: 13px;
+    }
+
+    .pdf-box {
+
+        min-height: 400px;
+
+        padding: 5px;
+    }
+
+    .navigation {
+
+        gap: 7px;
+    }
+
+    .nav-button {
+
+        min-width: 0;
+
+        flex: 1;
+
+        padding: 13px 8px;
+
+        font-size: 13px;
+    }
+
+    .end-buttons {
+
+        flex-direction: column;
+    }
+
+    .end-button {
+
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   PLEIN ÉCRAN
+========================================================= */
+
+.pdf-box:fullscreen {
+
+    width: 100vw;
+
+    height: 100vh;
+
+    min-height: 100vh;
+
+    padding: 10px;
+
+    border-radius: 0;
+
+    background: #050505;
+}
+
+.pdf-box:fullscreen #pdf-render {
+
+    max-width: none;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+<!-- =====================================================
+     MENU
+===================================================== -->
+
+<aside
+class="menu"
+id="menu">
+
+    <div class="menu-header">
+
+        <h2>
+            🗺️ Plan de la visite
+        </h2>
+
+        <button
+        class="close"
+        id="close-menu">
+
+            ×
+
+        </button>
+
+    </div>
+
+    <div
+    class="page-list"
+    id="page-list">
+
+    </div>
+
+</aside>
+
+
+<!-- OVERLAY -->
+
+<div
+class="overlay"
+id="overlay">
+</div>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+    <div class="logo-zone">
+
+        <img
+        class="logo"
+        src="https://i.postimg.cc/Y2g29xsg/Design-sans-titre-(30).png"
+        alt="Logo Les Blockhaus Lyssois">
+
+        <div class="title-zone">
+
+            <h1>
+                Les Blockhaus Lyssois
+            </h1>
+
+            <p>
+                Musée virtuel
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="header-buttons">
+
+        <button
+        class="header-button"
+        id="menu-button"
+        title="Plan de la visite"
+        aria-label="Plan de la visite">
+
+            ☰
+
+        </button>
+
+
+        <button
+        class="header-button"
+        id="fullscreen-button"
+        title="Plein écran"
+        aria-label="Plein écran">
+
+            ⛶
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     PROGRESSION
+===================================================== -->
+
+<div class="progress-container">
+
+    <div class="progress-info">
+
+        <span>
+            Progression
+        </span>
+
+        <span id="progress-text">
+            0 %
+        </span>
+
+    </div>
+
+    <div class="progress-bar">
+
+        <div
+        class="progress"
+        id="progress">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     CONTENU
+===================================================== -->
+
+<main>
+
+<div class="viewer">
+
+
+    <!-- TITRE -->
+
+    <div class="panel-title">
+
+        <h2 id="panel-title">
+            Chargement...
+        </h2>
+
+        <p id="panel-subtitle">
+            Préparation de la visite virtuelle
+        </p>
+
+    </div>
+
+
+    <!-- PDF -->
+
+    <div
+    class="pdf-box"
+    id="pdf-box">
+
+
+        <!-- CHARGEMENT -->
+
+        <div
+        class="loading"
+        id="loading">
+
+            <div class="spinner"></div>
+
+            <strong>
+                Chargement du musée...
+            </strong>
+
+            <span
+            style="
+                margin-top:8px;
+                color:#999;
+                font-size:13px;
+            ">
+
+                Veuillez patienter
+
+            </span>
+
+        </div>
+
+
+        <!-- CANVAS -->
+
+        <canvas
+        id="pdf-render">
+        </canvas>
+
+    </div>
+
+
+    <!-- OUTILS -->
+
+    <div class="tools">
+
+        <button
+        class="tool"
+        id="zoom-minus">
+
+            − Zoom
+
+        </button>
+
+
+        <button
+        class="tool"
+        id="zoom-reset">
+
+            100 %
+
+        </button>
+
+
+        <button
+        class="tool"
+        id="zoom-plus">
+
+            + Zoom
+
+        </button>
+
+
+        <button
+        class="tool"
+        id="pdf-fullscreen">
+
+            🖥️ Panneau plein écran
+
+        </button>
+
+    </div>
+
+
+    <!-- PAGE -->
+
+    <div class="page-number">
+
+        Page
+
+        <strong id="page-num">
+            1
+        </strong>
+
+        /
+
+        <strong id="page-count">
+            ...
+        </strong>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <div class="navigation">
+
+        <button
+        class="nav-button"
+        id="prev-page">
+
+            ← Précédent
+
+        </button>
+
+
+        <button
+        class="nav-button"
+        id="next-page">
+
+            Suivant →
+
+        </button>
+
+    </div>
+
+
+    <!-- ERREUR -->
+
+    <div
+    class="error"
+    id="error">
+
+    </div>
+
+
+    <!-- FIN -->
+
+    <section
+    class="end"
+    id="end">
+
+        <h2>
+            🎖️ Fin de la visite
+        </h2>
+
+        <p>
+            Vous venez de terminer la visite virtuelle
+            des Blockhaus Lyssois.
+        </p>
+
+        <p>
+            Merci d'avoir découvert notre patrimoine
+            historique.
+        </p>
+
+        <div class="end-buttons">
+
+            <a
+            class="end-button"
+            href="https://forms.gle/yjVSo2zuwNGiaTxB7"
+            target="_blank"
+            rel="noopener">
+
+                ⭐ Laisser un avis
+
+            </a>
+
+
+            <a
+            class="end-button"
+            href="https://lesblockhauslyssois-lbl.github.io/musee-virtuel/">
+
+                🏠 Accueil
+
+            </a>
+
+
+            <button
+            class="end-button"
+            id="restart">
+
+                🔄 Recommencer
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+</main>
+
+
+<footer>
+
+    © Les Blockhaus Lyssois — Musée virtuel
+
+</footer>
+
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   CONFIGURATION
+========================================================= */
+
+const PDF_URL = "visitebeta.pdf";
+
+
+/* =========================================================
+   PDF.JS
+========================================================= */
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let pdfDoc = null;
+
+let pageNum = 1;
+
+let rendering = false;
+
+let pendingPage = null;
+
+let zoom = 1.5;
+
+const DEFAULT_ZOOM = 1.5;
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const canvas =
+document.getElementById("pdf-render");
+
+const ctx =
+canvas.getContext("2d");
+
+const loading =
+document.getElementById("loading");
+
+const pageNumDisplay =
+document.getElementById("page-num");
+
+const pageCountDisplay =
+document.getElementById("page-count");
+
+const prevButton =
+document.getElementById("prev-page");
+
+const nextButton =
+document.getElementById("next-page");
+
+const progress =
+document.getElementById("progress");
+
+const progressText =
+document.getElementById("progress-text");
+
+const panelTitle =
+document.getElementById("panel-title");
+
+const panelSubtitle =
+document.getElementById("panel-subtitle");
+
+const pageList =
+document.getElementById("page-list");
+
+const menu =
+document.getElementById("menu");
+
+const overlay =
+document.getElementById("overlay");
+
+const end =
+document.getElementById("end");
+
+const errorBox =
+document.getElementById("error");
+
+const pdfBox =
+document.getElementById("pdf-box");
+
+
+/* =========================================================
+   TITRES
+========================================================= */
+
+/*
+    IMPORTANT :
+
+    Tu peux remplacer les titres ci-dessous
+    par les vrais titres de tes panneaux.
+
+    Si une page n'est pas renseignée,
+    le site affichera automatiquement :
+
+    "Panneau X"
+*/
+
+const titles = {
+
+    1: "Bienvenue dans le musée",
+
+    2: "Le contexte historique",
+
+    3: "Les Blockhaus Lyssois",
+
+    4: "La construction des blockhaus",
+
+    5: "La vie des soldats",
+
+    6: "L'organisation défensive",
+
+    7: "Les combats",
+
+    8: "Les habitants et la guerre",
+
+    9: "Après la guerre",
+
+    10: "La mémoire des blockhaus"
+
+};
+
+
+function getTitle(number) {
+
+    return titles[number]
+        || "Panneau " + number;
+
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+function createMenu() {
+
+    pageList.innerHTML = "";
+
+    for (
+        let i = 1;
+        i <= pdfDoc.numPages;
+        i++
+    ) {
+
+        const button =
+        document.createElement("button");
+
+        button.type = "button";
+
+        button.className =
+        "page-item";
+
+        button.dataset.page =
+        i;
+
+        button.innerHTML = `
+
+            <span class="page-circle">
+                ${i}
+            </span>
+
+            <span>
+                ${getTitle(i)}
+            </span>
+
+        `;
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                pageNum = i;
+
+                queueRenderPage(pageNum);
+
+                closeMenu();
+
+            }
+        );
+
+        pageList.appendChild(button);
+
+    }
+
+}
+
+
+/* =========================================================
+   MENU ACTIF
+========================================================= */
+
+function updateMenu() {
+
+    const items =
+    document.querySelectorAll(".page-item");
+
+    items.forEach(
+        item => {
+
+            const number =
+            Number(item.dataset.page);
+
+            if (number === pageNum) {
+
+                item.classList.add("active");
+
+            } else {
+
+                item.classList.remove("active");
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   PROGRESSION
+========================================================= */
+
+function updateProgress() {
+
+    if (!pdfDoc) {
+        return;
+    }
+
+    const percentage =
+    Math.round(
+        pageNum / pdfDoc.numPages * 100
+    );
+
+    progress.style.width =
+    percentage + "%";
+
+    progressText.textContent =
+    percentage + "%";
+
+}
+
+
+/* =========================================================
+   TITRE
+========================================================= */
+
+function updateTitle() {
+
+    panelTitle.textContent =
+    getTitle(pageNum);
+
+    panelSubtitle.textContent =
+    "Découvrez ce panneau de la visite virtuelle.";
+
+}
+
+
+/* =========================================================
+   AFFICHAGE PDF
+========================================================= */
+
+function renderPage(number) {
+
+    if (!pdfDoc) {
+        return;
+    }
+
+    rendering = true;
+
+    loading.classList.remove("hidden");
+
+
+    pdfDoc.getPage(number)
+    .then(
+        page => {
+
+            const viewport =
+            page.getViewport({
+                scale: zoom
+            });
+
+
+            canvas.width =
+            viewport.width;
+
+            canvas.height =
+            viewport.height;
+
+
+            const renderContext = {
+
+                canvasContext:
+                ctx,
+
+                viewport:
+                viewport
+
+            };
+
+
+            const renderTask =
+            page.render(
+                renderContext
+            );
+
+
+            renderTask.promise
+            .then(
+                () => {
+
+                    rendering = false;
+
+                    loading.classList.add(
+                        "hidden"
+                    );
+
+
+                    if (
+                        pendingPage !== null
+                    ) {
+
+                        const next =
+                        pendingPage;
+
+                        pendingPage =
+                        null;
+
+                        renderPage(next);
+
+                    }
+
+                }
+            );
+
+
+            pageNumDisplay.textContent =
+            number;
+
+            pageCountDisplay.textContent =
+            pdfDoc.numPages;
+
+
+            updateProgress();
+
+            updateMenu();
+
+            updateTitle();
+
+
+            prevButton.disabled =
+            number <= 1;
+
+            nextButton.disabled =
+            number >= pdfDoc.numPages;
+
+
+            if (
+                number === pdfDoc.numPages
+            ) {
+
+                end.classList.add(
+                    "visible"
+                );
+
+            } else {
+
+                end.classList.remove(
+                    "visible"
+                );
+
+            }
+
+
+            /* Sauvegarde */
+
+            localStorage.setItem(
+                "blockhaus-page",
+                number
+            );
+
+        }
+    )
+    .catch(
+        error => {
+
+            console.error(error);
+
+            rendering = false;
+
+            loading.classList.add(
+                "hidden"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   FILE D'ATTENTE
+========================================================= */
+
+function queueRenderPage(number) {
+
+    if (rendering) {
+
+        pendingPage =
+        number;
+
+    } else {
+
+        renderPage(
+            number
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function previousPage() {
+
+    if (pageNum <= 1) {
+        return;
+    }
+
+    pageNum--;
+
+    queueRenderPage(
+        pageNum
+    );
+
+}
+
+
+function nextPage() {
+
+    if (!pdfDoc) {
+        return;
+    }
+
+    if (
+        pageNum >= pdfDoc.numPages
+    ) {
+        return;
+    }
+
+    pageNum++;
+
+    queueRenderPage(
+        pageNum
+    );
+
+}
+
+
+/* =========================================================
+   ZOOM
+========================================================= */
+
+function zoomIn() {
+
+    zoom += 0.25;
+
+    if (zoom > 3) {
+        zoom = 3;
+    }
+
+    updateZoom();
+
+}
+
+
+function zoomOut() {
+
+    zoom -= 0.25;
+
+    if (zoom < 0.75) {
+        zoom = 0.75;
+    }
+
+    updateZoom();
+
+}
+
+
+function zoomReset() {
+
+    zoom =
+    DEFAULT_ZOOM;
+
+    updateZoom();
+
+}
+
+
+function updateZoom() {
+
+    const percent =
+    Math.round(
+        zoom / DEFAULT_ZOOM * 100
+    );
+
+    document.getElementById(
+        "zoom-reset"
+    ).textContent =
+    percent + " %";
+
+    queueRenderPage(
+        pageNum
+    );
+
+}
+
+
+/* =========================================================
+   MENU OUVRIR
+========================================================= */
+
+function openMenu() {
+
+    menu.classList.add(
+        "open"
+    );
+
+    overlay.classList.add(
+        "visible"
+    );
+
+}
+
+
+/* =========================================================
+   MENU FERMER
+========================================================= */
+
+function closeMenu() {
+
+    menu.classList.remove(
+        "open"
+    );
+
+    overlay.classList.remove(
+        "visible"
+    );
+
+}
+
+
+/* =========================================================
+   PLEIN ÉCRAN
+========================================================= */
+
+function fullscreen(element) {
+
+    if (
+        element.requestFullscreen
+    ) {
+
+        element.requestFullscreen();
+
+    } else if (
+        element.webkitRequestFullscreen
+    ) {
+
+        element.webkitRequestFullscreen();
+
+    }
+
+}
+
+
+/* =========================================================
+   BOUTONS
+========================================================= */
+
+prevButton.addEventListener(
+    "click",
+    previousPage
+);
+
+
+nextButton.addEventListener(
+    "click",
+    nextPage
+);
+
+
+document
+.getElementById("menu-button")
+.addEventListener(
+    "click",
+    openMenu
+);
+
+
+document
+.getElementById("close-menu")
+.addEventListener(
+    "click",
+    closeMenu
+);
+
+
+overlay.addEventListener(
+    "click",
+    closeMenu
+);
+
+
+document
+.getElementById("zoom-plus")
+.addEventListener(
+    "click",
+    zoomIn
+);
+
+
+document
+.getElementById("zoom-minus")
+.addEventListener(
+    "click",
+    zoomOut
+);
+
+
+document
+.getElementById("zoom-reset")
+.addEventListener(
+    "click",
+    zoomReset
+);
+
+
+document
+.getElementById("fullscreen-button")
+.addEventListener(
+    "click",
+    function() {
+
+        fullscreen(
+            document.documentElement
+        );
+
+    }
+);
+
+
+document
+.getElementById("pdf-fullscreen")
+.addEventListener(
+    "click",
+    function() {
+
+        fullscreen(
+            pdfBox
+        );
+
+    }
+);
+
+
+/* =========================================================
+   RECOMMENCER
+========================================================= */
+
+document
+.getElementById("restart")
+.addEventListener(
+    "click",
+    function() {
+
+        pageNum = 1;
+
+        zoom =
+        DEFAULT_ZOOM;
+
+        end.classList.remove(
+            "visible"
+        );
+
+        queueRenderPage(
+            1
+        );
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+);
+
+
+/* =========================================================
+   DOUBLE CLIC
+========================================================= */
+
+canvas.addEventListener(
+    "dblclick",
+    function() {
+
+        if (zoom < 2.5) {
+
+            zoomIn();
+
+        } else {
+
+            zoomReset();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CLAVIER
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "ArrowLeft"
+        ) {
+
+            previousPage();
+
+        }
+
+
+        if (
+            event.key === "ArrowRight"
+        ) {
+
+            nextPage();
+
+        }
+
+
+        if (
+            event.key === "+"
+            ||
+            event.key === "="
+        ) {
+
+            zoomIn();
+
+        }
+
+
+        if (
+            event.key === "-"
+        ) {
+
+            zoomOut();
+
+        }
+
+
+        if (
+            event.key.toLowerCase()
+            === "f"
+        ) {
+
+            fullscreen(
+                document.documentElement
+            );
+
+        }
+
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeMenu();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CHARGEMENT DU PDF
+========================================================= */
+
+pdfjsLib
+.getDocument(PDF_URL)
+.promise
+.then(
+    function(pdf) {
+
+        pdfDoc =
+        pdf;
+
+
+        pageCountDisplay.textContent =
+        pdf.numPages;
+
+
+        /*
+            Reprendre la dernière page
+        */
+
+        const saved =
+        parseInt(
+            localStorage.getItem(
+                "blockhaus-page"
+            ),
+            10
+        );
+
+
+        if (
+            !isNaN(saved)
+            &&
+            saved >= 1
+            &&
+            saved <= pdf.numPages
+        ) {
+
+            pageNum =
+            saved;
+
+        } else {
+
+            pageNum =
+            1;
+
+        }
+
+
+        createMenu();
+
+        renderPage(
+            pageNum
+        );
+
+    }
+)
+.catch(
+    function(error) {
+
+        console.error(
+            "Erreur PDF :",
+            error
+        );
+
+
+        loading.classList.add(
+            "hidden"
+        );
+
+
+        errorBox.innerHTML = `
+
+            <strong>
+                ⚠️ Le musée n'a pas pu être chargé.
+            </strong>
+
+            <br><br>
+
+            Erreur lors du chargement de :
+
+            <strong>
+                visitebeta.pdf
+            </strong>
+
+            <br><br>
+
+            Vérifie que
+            <strong>visitebeta.pdf</strong>
+            est bien dans le même dossier que cette page.
+
+            <br><br>
+
+            Si tu utilises GitHub Pages,
+            vérifie également que le fichier PDF
+            a bien été envoyé dans le dépôt.
+
+        `;
+
+
+        errorBox.classList.add(
+            "visible"
+        );
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

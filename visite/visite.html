@@ -1028,7 +1028,41 @@ footer {
      MENU
 ===================================================== -->
 
+<aside
+class="menu"
+id="menu">
 
+    <div class="menu-header">
+
+        <h2>
+            🗺️ Plan de la visite
+        </h2>
+
+        <button
+        class="close"
+        id="close-menu">
+
+            ×
+
+        </button>
+
+    </div>
+
+    <div
+    class="page-list"
+    id="page-list">
+
+    </div>
+
+</aside>
+
+
+<!-- OVERLAY -->
+
+<div
+class="overlay"
+id="overlay">
+</div>
 
 
 <!-- =====================================================
@@ -1128,7 +1162,17 @@ footer {
 
     <!-- TITRE -->
 
-  
+    <div class="panel-title">
+
+        <h2 id="panel-title">
+            Chargement...
+        </h2>
+
+        <p id="panel-subtitle">
+            Préparation de la visite virtuelle
+        </p>
+
+    </div>
 
 
     <!-- PDF -->
@@ -1443,7 +1487,94 @@ document.getElementById("pdf-box");
     "Panneau X"
 */
 
+const titles = {
 
+    1: "Bienvenue dans le musée",
+
+    2: "Le contexte historique",
+
+    3: "Les Blockhaus Lyssois",
+
+    4: "La construction des blockhaus",
+
+    5: "La vie des soldats",
+
+    6: "L'organisation défensive",
+
+    7: "Les combats",
+
+    8: "Les habitants et la guerre",
+
+    9: "Après la guerre",
+
+    10: "La mémoire des blockhaus"
+
+};
+
+
+function getTitle(number) {
+
+    return titles[number]
+        || "Panneau " + number;
+
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+function createMenu() {
+
+    pageList.innerHTML = "";
+
+    for (
+        let i = 1;
+        i <= pdfDoc.numPages;
+        i++
+    ) {
+
+        const button =
+        document.createElement("button");
+
+        button.type = "button";
+
+        button.className =
+        "page-item";
+
+        button.dataset.page =
+        i;
+
+        button.innerHTML = `
+
+            <span class="page-circle">
+                ${i}
+            </span>
+
+            <span>
+                ${getTitle(i)}
+            </span>
+
+        `;
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                pageNum = i;
+
+                queueRenderPage(pageNum);
+
+                closeMenu();
+
+            }
+        );
+
+        pageList.appendChild(button);
+
+    }
+
+}
 
 
 /* =========================================================
